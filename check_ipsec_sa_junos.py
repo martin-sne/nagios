@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# $id mleucht (C) I/P/B/ GmbH  
+# $id mleucht (C) I/P/B/ GmbH  2016
 #
 # TODO: Implement SNMPv3 support
 
@@ -27,6 +27,7 @@ def shell_exec():
         except subprocess.CalledProcessError:
                 print "Something bad happened"
                 sys.exit(errors['CRITICAL'])
+
 def main():
         tunneldesc=sys.argv[5]
         try:
@@ -39,11 +40,9 @@ def main():
                 else:
                         print "CRITICAL SA for IPSec Tunnel " + tunneldesc + " is not active"
                         sys.exit(errors['CRITICAL'])
-
         except ValueError:
                 print "An error occured, perhaps IKE Gateway for " + tunneldesc + " is not configured on that device"
                 sys.exit(errors['CRITICAL'])
-
 
 def help():
         print "Usage: ./" + sys.argv[0] + " [SNMPversion] [SNMPcommunity] [SNMPHost (IP or FQDN)] [IP of IKE Gateway] [descriptive name of IPSec Tunnel]"
